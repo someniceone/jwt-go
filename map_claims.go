@@ -69,7 +69,7 @@ func (m MapClaims) VerifyNotBefore(cmp int64, req bool) bool {
 // be considered a valid claim.
 func (m MapClaims) Valid() error {
 	vErr := new(ValidationError)
-	now := TimeFunc().Unix()
+	now := TimeFunc().Unix() * 1000 // Convert seconds to milliseconds
 
 	if m.VerifyExpiresAt(now, false) == false {
 		vErr.Inner = errors.New("Token is expired")
